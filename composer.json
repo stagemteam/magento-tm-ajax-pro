@@ -1,0 +1,14 @@
+{
+    "name": "stagem/magento-tm-ajax-pro",
+    "type": "magento-module",
+    "license":"MIT Licence",
+    "description":"Magento Ajax Pro",
+    "authors":[{
+        "name":"Serhii Popov",
+        "email":"popow.serhii@gmail.com"
+    }],
+    "extra": {
+        "map": [
+            ]
+    }
+}
