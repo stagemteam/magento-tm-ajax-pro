@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ajax_pro translate="title" module="ajaxpro">
+                                        <title>Ajax Pro</title>
+                                        <sort_order>110</sort_order>
+                                    </ajax_pro>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+ </config>

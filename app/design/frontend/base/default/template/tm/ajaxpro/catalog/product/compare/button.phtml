@@ -1,0 +1,13 @@
+<?php
+    $_helper = Mage::helper('catalog/product_compare');
+    if (1 > $_helper->getItemCount()) {
+        return;
+    }
+    $_helper->calculate();
+?>
+<!--<p class="ajaxpro-or"><?php echo Mage::helper('ajaxpro')->__('or')?></p>-->
+<button class="ajaxpro-button button" onclick="popWin('<?php echo $_helper->getListUrl() ?>', 'compare','width=800,height=600,resizable=yes,scrollbars=yes')">
+    <span><span>
+        <?php echo Mage::helper('ajaxpro')->__('Compare Items');?>
+    </span></span>
+</button>

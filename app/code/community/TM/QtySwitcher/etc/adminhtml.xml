@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <tm_qtyswitcher translate="title" module="tm_qtyswitcher">
+                                        <title>Quantity Switcher</title>
+                                        <sort_order>1777</sort_order>
+                                    </tm_qtyswitcher>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+ </config>

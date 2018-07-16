@@ -1,0 +1,125 @@
+<?php
+/**
+ * Customer login form template
+ *
+ * @see Mage_Customer_Block_Form_Login
+ */
+?>
+<?php if (  !Mage::getStoreConfig('ajax_pro/general/enabled')
+         || !Mage::getStoreConfig('ajax_pro/general/useLoginFormBlock')
+         || TM_AjaxPro_Model_UserAgent::isSearchBot()
+    )
+{
+    return;
+}
+?>
+
+<div class="account-login ajaxpro-login ajaxpro-popup">
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="ajaxpro-login-form">
+        <?php $formKey = Mage::getSingleton('core/session')->getFormKey();
+        if (!empty($formKey)) : ?>
+            <input name="form_key" type="hidden" value="<?php echo $formKey ?>" />
+        <?php endif ?>
+
+        <div class="content">
+            <ul class="form-list">
+                <li>
+                    <label for="email" class="required"><em>*</em><?php echo Mage::helper('customer')->__('Email Address') ?></label>
+                    <div class="input-box">
+                        <input type="email" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo Mage::helper('customer')->__('Email Address') ?>" />
+                    </div>
+                </li>
+                <li>
+                    <label for="pass" class="required"><em>*</em><?php echo Mage::helper('customer')->__('Password') ?></label>
+                    <div class="input-box">
+                        <input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo Mage::helper('customer')->__('Password') ?>" />
+                    </div>
+                </li>
+                <?php echo $this->getChildHtml('form.additional.info'); ?>
+                <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+            </ul>
+            <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+        </div>
+        <div class="buttons-set">
+            <a href="<?php echo $this->getCreateAccountUrl() ?>" class="link-register"><?php echo $this->__('Register') ?></a>
+            <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="link-forgot"><?php echo $this->__('Forgot?') ?></a>
+            <button type="submit" class="button" title="<?php echo Mage::helper('customer')->__('Login') ?>" name="send" id="send2"><span><span><?php echo Mage::helper('customer')->__('Login') ?></span></span></button>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        document.observe("dom:loaded", function () {
+
+            function hideClickHandler(e) {
+                if (e.element().up('.account-login')) {
+                    return;
+                }
+                var block = $('ajaxpro-login-form').up('.account-login');
+                if (block) {
+                    block.removeClassName('ajaxpro-block-shown');
+                }
+                document.stopObserving('click', hideClickHandler);
+            }
+            function toggleLoginForm(e) {
+
+                var handle = 'customer_account_create';
+                if ($$('#captcha-input-box-user_create').length > 1
+                    || -1 != AjaxPro.config.get('handles').indexOf(handle)) {
+
+                    return;
+                }
+                e.stop();
+
+                // login page
+                var originalForm = $('login-form');
+                if (originalForm) {
+                    originalForm.scrollTo();
+                    return;
+                }
+
+                var block = $('ajaxpro-login-form').up('.account-login'),
+                    position = e.pointer(),
+                    left = position.x,
+                    top  = position.y + 10;
+
+                // fix top accroding to e.element() height
+                var el = e.element();
+                if (el) {
+                    top = el.cumulativeOffset().top + el.getHeight() + 3;
+                }
+
+                // fix position acording to header or content edge
+                var contstraintEl = $$('.header, .main').first();
+                if (contstraintEl) {
+                    var blockRight = left + block.getWidth(),
+                        maxRight   = contstraintEl.cumulativeOffset().left
+                            + contstraintEl.getWidth();
+
+                    if (blockRight > maxRight) {
+                        left = left - (blockRight - maxRight) - 5;
+                    }
+                }
+
+                block.setStyle({
+                    right : 'auto',
+                    bottom: 'auto',
+                    left  : left + 'px',
+                    top   : top + 'px'
+                });
+                block.toggleClassName('ajaxpro-block-shown');
+
+                document.observe('click', hideClickHandler);
+            };
+            AjaxPro.observe('addObservers', function() {
+                var elements = $$('.links a:[href="<?php echo Mage::helper('customer')->getLoginUrl();?>"]');
+                elements.each(function(el){
+                    if (!el) {
+                        return;
+                    }
+                    el.observe('click', toggleLoginForm);
+                });
+            });
+        });
+    //]]>
+    </script>
+</div>

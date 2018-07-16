@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <tm_qtyswitcher_head>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/tm/qty-switcher.css</name>
+            </action>
+        </reference>
+    </tm_qtyswitcher_head>
+
+    <tm_qtyswitcher_jsinit>
+        <reference name="before_body_end">
+            <action method="unsetChild"><child>qty-switcher.js</child></action>
+            <block type="core/text" name="qty-switcher.js">
+                <action method="setText">
+                    <text helper="tm_qtyswitcher/getJsInit"/>
+                </action>
+            </block>
+            <!-- <block type="core/template" name="qty-switcher.js" template="tm/qty-switcher/init.phtml" /> -->
+        </reference>
+    </tm_qtyswitcher_jsinit>
+
+    <tm_qtyswitcher_head_product>
+        <update handle="tm_qtyswitcher_head"/>
+        <update handle="tm_qtyswitcher_jsinit"/>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/tm/qty-switcher/product.js</name>
+                <params>defer</params>
+            </action>
+        </reference>
+    </tm_qtyswitcher_head_product>
+
+    <tm_qtyswitcher_head_category>
+        <update handle="tm_qtyswitcher_head"/>
+        <update handle="tm_qtyswitcher_jsinit"/>
+        <reference name="head">
+            <action method="addItem" ifconfig="tm_qtyswitcher/category/enabled">
+                <type>skin_js</type>
+                <name>js/tm/qty-switcher/category.js</name>
+                <params>defer</params>
+            </action>
+        </reference>
+    </tm_qtyswitcher_head_category>
+
+    <tm_qtyswitcher_head_cart>
+        <update handle="tm_qtyswitcher_head"/>
+        <update handle="tm_qtyswitcher_jsinit"/>
+        <reference name="head">
+            <action method="addItem" ifconfig="tm_qtyswitcher/cart/enabled">
+                <type>skin_js</type>
+                <name>js/tm/qty-switcher/cart.js</name>
+                <params>defer</params>
+            </action>
+        </reference>
+    </tm_qtyswitcher_head_cart>
+
+    <checkout_cart_index>
+        <update handle="tm_qtyswitcher_head_cart"/>
+    </checkout_cart_index>
+
+    <catalog_product_view>
+        <update handle="tm_qtyswitcher_head_product"/>
+        <update handle="tm_qtyswitcher_head_cart"/>
+    </catalog_product_view>
+
+    <review_product_list>
+        <update handle="tm_qtyswitcher_head_product"/>
+        <update handle="tm_qtyswitcher_head_cart"/>
+    </review_product_list>
+
+    <product_list>
+        <update handle="tm_qtyswitcher_head_product"/>
+        <update handle="tm_qtyswitcher_head_category"/>
+        <update handle="tm_qtyswitcher_head_cart"/>
+    </product_list>
+
+</layout>

@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <!-- AjaxPro -->
+    <default>
+
+        <reference name="head">
+            <block type="ajaxpro/head" name="ajaxpro.head" as="ajaxpro.head">
+                <action method="addItem"><type>skin_css</type><name>css/tm/ajaxpro.css</name></action>
+                <action method="addItem"><type>skin_js</type><name>js/tm/ajaxpro.js</name></action>
+                <action method="addItem"><type>skin_js</type><name>js/tm/ajaxpro/config.js</name></action>
+                <action method="addItem"><type>skin_js</type><path>js/tm/ajaxpro/message.js</path></action>
+                <action method="addItem"><type>skin_js</type><path>js/tm/ajaxpro/spinner.js</path></action>
+                <action method="addItem" ifconfig="ajax_pro/effect/enabled_opacity"><type>skin_js</type><path>js/tm/ajaxpro/opacity.js</path></action>
+                <action method="addItem" ifconfig="ajax_pro/effect/enabled_overlay"><type>skin_js</type><path>js/tm/ajaxpro/overlay.js</path></action>
+                <action method="addItem" ifconfig="ajax_pro/catalogProductCompare/enabled"><type>skin_js</type><name>js/tm/ajaxpro/catalog/product/compare.js</name></action>
+                <action method="addItem" ifconfig="ajax_pro/catalogProductView/enabled"><type>skin_js</type><name>js/tm/ajaxpro/catalog/product/view.js</name></action>
+                <action method="addItem" ifconfig="ajax_pro/checkoutCart/enabled"><type>skin_js</type><name>js/tm/ajaxpro/checkout/cart.js</name></action>
+                <action method="addItem" ifconfig="ajax_pro/catalogCategoryView/enabled"><type>skin_js</type><path>js/tm/ajaxpro/catalog/category/view.js</path></action>
+                <action method="addItem"><type>skin_js</type><name>js/tm/ajaxpro/configurableswatches.js</name></action>
+
+                <action method="addStoreConfigValidator"><path>wishlistIndex/enabled</path></action>
+                <action method="addModelMethodValidator">
+                    <model>customer/session</model>
+                    <method>isLoggedIn</method>
+                </action>
+                <action method="addItem"><type>skin_js</type><path>js/tm/ajaxpro/wishlist/index.js</path></action>
+            </block>
+        </reference>
+
+        <reference name="top.container">
+            <block type="ajaxpro/template" name="ajaxpro.top.container" as="ajaxpro.top.container">
+                <block type="checkout/cart_sidebar" name="headerCart" as="headerCart" template="tm/ajaxpro/checkout/headerCart.phtml" before="-">
+                    <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                    <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                    <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+
+                    <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                </block>
+            </block>
+        </reference>
+
+        <reference name="before_body_end">
+            <block type="ajaxpro/template" name="ajaxpro.before_body_end" as="ajaxpro.before_body_end">
+                <block type="ajaxpro/form_login" name="ajaxpro_customer_login" template="tm/ajaxpro/customer/login.phtml">
+                    <block type="core/text_list" name="form.additional.info">
+                        <block type="captcha/captcha" name="ajaxpro.captcha">
+                            <reference name="head">
+                                <action method="addJs"><file>mage/captcha.js</file></action>
+                            </reference>
+                            <action method="setFormId"><formId>user_login</formId></action>
+                            <action method="setImgWidth"><width>230</width></action>
+                            <action method="setImgHeight"><width>50</width></action>
+                        </block>
+                    </block>
+                    <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml" />
+                    <block type="core/template" name="persistent.remember.me.tooltip" template="persistent/remember_me_tooltip.phtml" />
+                </block>
+                <block type="core/template" name="ajaxpro_init" template="tm/ajaxpro/init.phtml"/>
+                <block type="core/template" name="ajaxpro_message" as="ajaxpro_message" template="tm/ajaxpro/form/container.phtml">
+                    <block type="core/template" name="ajaxpro_message.grouped" as="ajaxpro_message.grouped" template="tm/ajaxpro/form/grouped.phtml"/>
+                    <block type="page/html_wrapper" name="ajaxpro_message.buttons" as="ajaxpro_message.buttons">
+                        <action method="setElementClass">
+                            <name>ajaxpro-buttons-set</name>
+                        </action>
+                        <block type="core/template" name="ajaxpro_message.continue" as="ajaxpro_message.continue" template="tm/ajaxpro/form/button/continue.phtml"/>
+                    </block>
+                </block>
+            </block>
+        </reference>
+
+    </default>
+
+    <tm_ajaxpro_short_messages>
+        <reference name="ajaxpro_message.grouped">
+            <action method="setCssWrapperClass">
+                <name>ajaxpro-short-messages</name>
+            </action>
+        </reference>
+    </tm_ajaxpro_short_messages>
+
+    <tm_ajaxpro_checkout_cart_add_simple>
+        <update handle="tm_ajaxpro_short_messages"/>
+        <reference name="ajaxpro_message.buttons">
+            <block type="core/template" name="ajaxpro_message.action" template="tm/ajaxpro/checkout/cart/button.phtml"/>
+        </reference>
+    </tm_ajaxpro_checkout_cart_add_simple>
+
+    <tm_ajaxpro_checkout_cart_add_with_crosssell>
+        <!--<update handle="tm_ajaxpro_checkout_cart_add_simple"/>-->
+        <reference name="ajaxpro_message.buttons">
+            <block type="core/template" name="ajaxpro_message.action" template="tm/ajaxpro/checkout/cart/button.phtml"/>
+        </reference>
+        <reference name="ajaxpro_message">
+            <block type="checkout/cart_crosssell" name="checkout.cart.crosssell" as="crosssell" template="tm/ajaxpro/checkout/cart/crosssell.phtml"/>
+            <!--<block type="catalog/product_list_related" name="catalog.product.related" before="-" template="catalog/product/list/related.phtml"/>-->
+        </reference>
+    </tm_ajaxpro_checkout_cart_add_with_crosssell>
+
+    <tm_ajaxpro_checkout_cart_add_with_cart_extended>
+        <update handle="checkout_cart_index"/>
+        <x-unremove name="right"/>
+        <x-unremove name="left"/>
+        <reference name="checkout.cart">
+            <action method="setCartTemplate">
+                <value>tm/ajaxpro/checkout/cart.phtml</value>
+            </action>
+            <action method="setEmptyTemplate">
+                <value>tm/ajaxpro/checkout/cart/noItems.phtml</value>
+            </action>
+            <action method="chooseTemplate"/>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>checkout/cart_item_renderer</block>
+                <template>tm/ajaxpro/checkout/cart/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>simple</type>
+                <block>checkout/cart_item_renderer</block>
+                <template>tm/ajaxpro/checkout/cart/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>checkout/cart_item_renderer_grouped</block>
+                <template>tm/ajaxpro/checkout/cart/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>configurable</type>
+                <block>checkout/cart_item_renderer_configurable</block>
+                <template>tm/ajaxpro/checkout/cart/item/default.phtml</template>
+            </action>
+
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>bundle/checkout_cart_item_renderer</block>
+                <template>tm/ajaxpro/checkout/cart/item/default.phtml</template>
+            </action>
+
+            <action method="addItemRender">
+                <type>downloadable</type>
+                <block>downloadable/checkout_cart_item_renderer</block>
+                <template>tm/ajaxpro/checkout/cart/item/downloadable.phtml</template>
+            </action>
+        </reference>
+        <remove name="ajaxpro_message.continue"/>
+        <reference name="ajaxpro_message">
+            <action method="insert"><name>checkout.cart</name></action>
+        </reference>
+        <reference name="checkout.cart.methods.paypal_express.top">
+            <action method="setShowOrPosition"><value>never</value></action>
+        </reference>
+        <reference name="checkout.cart.methods.paypal_express.bottom">
+            <action method="setShowOrPosition"><value>never</value></action>
+        </reference>
+        <remove name="checkout.cart.methods.multishipping"/>
+    </tm_ajaxpro_checkout_cart_add_with_cart_extended>
+
+    <tm_ajaxpro_checkout_cart_add_with_cart>
+        <update handle="tm_ajaxpro_checkout_cart_add_with_cart_extended"/>
+        <remove name="checkout.cart.coupon"/>
+        <remove name="checkout.cart.shipping"/>
+    </tm_ajaxpro_checkout_cart_add_with_cart>
+
+    <tm_ajaxpro_catalog_product_compare_add>
+        <update handle="tm_ajaxpro_short_messages"/>
+        <reference name="ajaxpro_message.buttons">
+            <block type="core/template" name="ajaxpro_message.action" template="tm/ajaxpro/catalog/product/compare/button.phtml"/>
+        </reference>
+    </tm_ajaxpro_catalog_product_compare_add>
+
+    <tm_ajaxpro_wishlist_index>
+        <update handle="tm_ajaxpro_short_messages"/>
+        <reference name="ajaxpro_message.buttons">
+            <block type="core/template" name="ajaxpro_message.action" template="tm/ajaxpro/wishlist/index/button.phtml"/>
+        </reference>
+    </tm_ajaxpro_wishlist_index>
+
+    <checkout_cart_index>
+        <!--<remove name="headerCart"/>-->
+        <reference name="before_body_end">
+            <action method="unsetChild" ifconfig="ajax_pro/general/disabledOnShoppingCartPage">
+                <name>ajaxpro.before_body_end</name>
+            </action>
+        </reference>
+    </checkout_cart_index>
+
+    <catalog_product_compare_index>
+        <reference name="before_body_end">
+            <action method="unsetChild">
+                <name>ajaxpro.before_body_end</name>
+            </action>
+        </reference>
+    </catalog_product_compare_index>
+
+    <tm_ajaxpro_catalog_product_view>
+        <reference name="product.info">
+            <block type="core/text_list" name="ajaxpro_additional" output="toHtml" />
+        </reference>
+    </tm_ajaxpro_catalog_product_view>
+
+    <customer_account_login>
+        <remove name="ajaxpro_customer_login"/>
+    </customer_account_login>
+
+    <checkout_onepage_index>
+        <remove name="ajaxpro_customer_login"/>
+    </checkout_onepage_index>
+
+    <firecheckout_index_index>
+        <remove name="ajaxpro_customer_login"/>
+    </firecheckout_index_index>
+</layout>

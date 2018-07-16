@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<jstranslator>
+    <!-- start cart.js -->
+    <ajaxpro-cart-confirm1 translate="message" module="ajaxpro">
+        <message>Are you sure you would like to remove this item from the shopping cart?</message>
+    </ajaxpro-cart-confirm1>
+    <!-- end cart.js -->
+
+    <!-- start compare.js -->
+    <ajaxpro-compare-confirm1 translate="message" module="ajaxpro">
+        <message>Are you sure you would like to remove this item from the compare products?</message>
+    </ajaxpro-compare-confirm1>
+
+    <ajaxpro-compare-confirm2 translate="message" module="ajaxpro">
+        <message>Are you sure you would like to remove all products from your comparison?</message>
+    </ajaxpro-compare-confirm2>
+    <!-- end compare.js -->
+
+    <!-- start wishlist/index.js -->
+    <ajaxpro-wish-confirm1 translate="message" module="ajaxpro">
+        <message>Are you sure you would like to remove this item from the wishlist?</message>
+    </ajaxpro-wish-confirm1>
+    <!-- end wishlist.js -->
+
+    <!-- start continue.phtml -->
+    <ajaxpro-continue1 translate="message" module="ajaxpro">
+        <message>Continue shopping (%d second)</message>
+    </ajaxpro-continue1>
+    <!-- end  -->
+
+    <!-- start toolbar.js -->
+    <ajaxpro-more-products translate="message" module="ajaxpro">
+        <message>More Products</message>
+    </ajaxpro-more-products>
+    <!-- end  -->
+
+</jstranslator>

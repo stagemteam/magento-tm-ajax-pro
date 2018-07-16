@@ -1,0 +1,9 @@
+<?php $cssClass = $this->getCssWrapperClass();
+if (!empty($cssClass)) {
+    $cssClass = ' class="' . $cssClass . '"';
+}
+?>
+
+<div<?php echo $cssClass;?>>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+</div>

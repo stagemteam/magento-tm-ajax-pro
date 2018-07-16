@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- AjaxPro -->
+   <modules>
+       <TM_AjaxPro>
+           <version>3.3.16</version>
+       </TM_AjaxPro>
+   </modules>
+
+   <global>
+
+        <models>
+            <ajaxpro>
+                <class>TM_AjaxPro_Model</class>
+            </ajaxpro>
+        </models>
+
+        <helpers>
+            <ajaxpro>
+                <class>TM_AjaxPro_Helper</class>
+            </ajaxpro>
+        </helpers>
+
+        <resources>
+            <tm_ajaxpro_setup>
+                <setup>
+                    <module>TM_AjaxPro</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </tm_ajaxpro_setup>
+        </resources>
+
+        <blocks>
+            <catalog>
+                <rewrite>
+                    <product_list>TM_AjaxPro_Block_Product_List</product_list>
+                    <product_new>TM_AjaxPro_Block_Product_New</product_new>
+                </rewrite>
+            </catalog>
+            <checkout>
+                <rewrite>
+                    <cart_crosssell>TM_AjaxPro_Block_Cart_Crosssell</cart_crosssell>
+                </rewrite>
+            </checkout>
+            <ajaxpro>
+                <class>TM_AjaxPro_Block</class>
+            </ajaxpro>
+        </blocks>
+
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <ajaxpro_add_block_wrapper>
+                        <class>ajaxpro/observer</class>
+                        <method>toHtmlAfter</method>
+                    </ajaxpro_add_block_wrapper>
+
+                    <ajaxpro_add_refresh_toolbar_vars>
+                        <class>ajaxpro/observer</class>
+                        <method>refreshToolbarVars</method>
+                    </ajaxpro_add_refresh_toolbar_vars>
+                </observers>
+            </core_block_abstract_to_html_after>
+
+            <controller_action_postdispatch_checkout_cart_add>
+                <observers>
+                    <ajaxpro_checkout_cart_add_action>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartAddAction</method>
+                    </ajaxpro_checkout_cart_add_action>
+                </observers>
+            </controller_action_postdispatch_checkout_cart_add>
+
+            <controller_action_predispatch_checkout_cart_add>
+                <observers>
+                    <ajaxpro_pre_checkout_cart_add_action>
+                        <class>ajaxpro/observer</class>
+                        <method>clearParamsForInfoBuyRequest</method>
+                    </ajaxpro_pre_checkout_cart_add_action>
+                </observers>
+            </controller_action_predispatch_checkout_cart_add>
+
+            <controller_action_predispatch_checkout_cart_updatePost>
+                <observers>
+                    <ajaxpro_checkout_cart_updatePost_action>
+                        <class>ajaxpro/observer</class>
+                        <method>clearQuoteMessages</method>
+                    </ajaxpro_checkout_cart_updatePost_action>
+                </observers>
+            </controller_action_predispatch_checkout_cart_updatePost>
+
+            <controller_action_postdispatch_checkout_cart_updatePost>
+                <observers>
+                    <ajaxpro_checkout_cart_updatePost_action>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartAddAction</method>
+                    </ajaxpro_checkout_cart_updatePost_action>
+                </observers>
+            </controller_action_postdispatch_checkout_cart_updatePost>
+
+            <controller_action_postdispatch_checkout_cart_updateItemOptions>
+                <observers>
+                    <ajaxpro_checkout_cart_updateItemOptions_action>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartAddAction</method>
+                    </ajaxpro_checkout_cart_updateItemOptions_action>
+                </observers>
+            </controller_action_postdispatch_checkout_cart_updateItemOptions>
+
+            <checkout_cart_update_item_complete>
+                <observers>
+                    <ajaxpro_checkout_cart_updateItemOptions_complete>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartUpdateItemOptionsComplete</method>
+                    </ajaxpro_checkout_cart_updateItemOptions_complete>
+                </observers>
+            </checkout_cart_update_item_complete>
+
+            <controller_action_postdispatch_checkout_cart_delete>
+                <observers>
+                    <ajaxpro_checkout_cart_delete_action>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartAddAction</method>
+                    </ajaxpro_checkout_cart_delete_action>
+                </observers>
+            </controller_action_postdispatch_checkout_cart_delete>
+
+            <controller_action_postdispatch_checkout_cart_couponPost>
+                <observers>
+                    <ajaxpro_checkout_cart_action>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartAddAction</method>
+                    </ajaxpro_checkout_cart_action>
+                </observers>
+            </controller_action_postdispatch_checkout_cart_couponPost>
+
+            <controller_action_postdispatch_checkout_cart_estimatePost>
+                <observers>
+                    <ajaxpro_checkout_cart_action>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartQuoteTotalsRecalculate</method>
+                    </ajaxpro_checkout_cart_action>
+                    <ajaxpro_checkout_cart_action_post>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartAddAction</method>
+                    </ajaxpro_checkout_cart_action_post>
+                </observers>
+            </controller_action_postdispatch_checkout_cart_estimatePost>
+
+            <controller_action_postdispatch_checkout_cart_estimateUpdatePost>
+                <observers>
+                    <ajaxpro_checkout_cart_action>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartQuoteTotalsRecalculate</method>
+                    </ajaxpro_checkout_cart_action>
+                    <ajaxpro_checkout_cart_action_post>
+                        <class>ajaxpro/observer</class>
+                        <method>checkoutCartAddAction</method>
+                    </ajaxpro_checkout_cart_action_post>
+                </observers>
+            </controller_action_postdispatch_checkout_cart_estimateUpdatePost>
+
+            <controller_action_postdispatch_wishlist_index_add>
+                <observers>
+                    <ajaxpro_wishlist_index_addAction>
+                        <class>ajaxpro/observer</class>
+                        <method>wishlistIndexAddAction</method>
+                    </ajaxpro_wishlist_index_addAction>
+                </observers>
+            </controller_action_postdispatch_wishlist_index_add>
+
+            <controller_action_postdispatch_wishlist_index_remove>
+                <observers>
+                    <ajaxpro_wishlist_index_removeAction>
+                        <class>ajaxpro/observer</class>
+                        <method>wishlistIndexAddAction</method>
+                    </ajaxpro_wishlist_index_removeAction>
+                </observers>
+            </controller_action_postdispatch_wishlist_index_remove>
+
+            <controller_action_postdispatch_wishlist_index_cart>
+                <observers>
+                    <ajaxpro_wishlist_index_cartAction>
+                        <class>ajaxpro/observer</class>
+                        <method>wishlistIndexCartAction</method>
+                    </ajaxpro_wishlist_index_cartAction>
+                </observers>
+            </controller_action_postdispatch_wishlist_index_cart>
+
+            <controller_action_postdispatch_wishlist_index_fromcart>
+                <observers>
+                    <ajaxpro_wishlist_index_cartAction>
+                        <class>ajaxpro/observer</class>
+                        <method>wishlistIndexCartAction</method>
+                    </ajaxpro_wishlist_index_cartAction>
+                </observers>
+            </controller_action_postdispatch_wishlist_index_fromcart>
+
+            <controller_action_postdispatch_catalog_product_compare_add>
+                <observers>
+                    <ajaxpro_catalog_product_compare_add>
+                        <class>ajaxpro/observer</class>
+                        <method>catalogProductCompareAddAction</method>
+                    </ajaxpro_catalog_product_compare_add>
+                </observers>
+            </controller_action_postdispatch_catalog_product_compare_add>
+
+            <controller_action_postdispatch_catalog_product_compare_remove>
+                <observers>
+                    <ajaxpro_catalog_product_compare_remove>
+                        <class>ajaxpro/observer</class>
+                        <method>catalogProductCompareAddAction</method>
+                    </ajaxpro_catalog_product_compare_remove>
+                </observers>
+            </controller_action_postdispatch_catalog_product_compare_remove>
+
+            <controller_action_postdispatch_catalog_product_compare_clear>
+                <observers>
+                    <ajaxpro_catalog_product_compare_clear>
+                        <class>ajaxpro/observer</class>
+                        <method>catalogProductCompareAddAction</method>
+                    </ajaxpro_catalog_product_compare_clear>
+                </observers>
+            </controller_action_postdispatch_catalog_product_compare_clear>
+
+            <controller_action_postdispatch_attributepages_page_view>
+                <observers>
+                    <ajaxpro_catalogsearch_result_index>
+                        <class>ajaxpro/observer</class>
+                        <method>catalogCategoryViewAction</method>
+                    </ajaxpro_catalogsearch_result_index>
+                </observers>
+            </controller_action_postdispatch_attributepages_page_view>
+
+            <controller_action_postdispatch_catalog_category_view>
+                <observers>
+                    <ajaxpro_catalog_category_view>
+                        <class>ajaxpro/observer</class>
+                        <method>catalogCategoryViewAction</method>
+                    </ajaxpro_catalog_category_view>
+                </observers>
+            </controller_action_postdispatch_catalog_category_view>
+
+            <controller_action_postdispatch_catalogsearch_result_index>
+                <observers>
+                    <ajaxpro_catalogsearch_result_index>
+                        <class>ajaxpro/observer</class>
+                        <method>catalogCategoryViewAction</method>
+                    </ajaxpro_catalogsearch_result_index>
+                </observers>
+            </controller_action_postdispatch_catalogsearch_result_index>
+
+            <controller_action_postdispatch_catalogsearch_advanced_result>
+                <observers>
+                    <ajaxpro_catalogsearch_result_index>
+                        <class>ajaxpro/observer</class>
+                        <method>catalogCategoryViewAction</method>
+                    </ajaxpro_catalogsearch_result_index>
+                </observers>
+            </controller_action_postdispatch_catalogsearch_advanced_result>
+
+            <controller_action_postdispatch_catalog_product_view>
+                <observers>
+                    <ajaxpro_catalog_product_view>
+                        <class>ajaxpro/observer</class>
+                        <method>catalogProductViewAction</method>
+                    </ajaxpro_catalog_product_view>
+                </observers>
+            </controller_action_postdispatch_catalog_product_view>
+
+            <tm_cache_prepare_cache_key>
+                <observers>
+                    <ajaxpro_tmcache_key>
+                        <class>ajaxpro/observer</class>
+                        <method>tmcachePrepareCacheKey</method>
+                    </ajaxpro_tmcache_key>
+                </observers>
+            </tm_cache_prepare_cache_key>
+
+            <controller_action_layout_generate_xml_before>
+                <observers>
+                    <alanstormdotcom_unremoveblock_observer>
+                        <type>singleton</type>
+                        <class>ajaxpro/observer</class>
+                        <method>unremoveUpdate</method>
+                    </alanstormdotcom_unremoveblock_observer>
+                </observers>
+            </controller_action_layout_generate_xml_before>
+        </events>
+
+    </global>
+
+    <default>
+        <ajax_pro>
+            <general>
+                <enabled>0</enabled>
+                <disabledOnShoppingCartPage>0</disabledOnShoppingCartPage>
+                <disabledOnMobileDevice>0</disabledOnMobileDevice>
+                <useLoginFormBlock>0</useLoginFormBlock>
+                <blocks>formkey</blocks>
+            </general>
+            <effect>
+                <location>center</location>
+                <spinner_location>1</spinner_location>
+                <enabled_overlay>0</enabled_overlay>
+                <enabled_opacity>1</enabled_opacity>
+                <overlay_opacity>0.7</overlay_opacity>
+                <duration>0.5</duration>
+                <opacity>1</opacity>
+                <text></text>
+                <autohidemessagedelay>180</autohidemessagedelay>
+            </effect>
+            <checkoutCart>
+                <enabled>1</enabled>
+                <enabledForm>1</enabledForm>
+                <enabledDeleteConfirm>1</enabledDeleteConfirm>
+                <useHeaderCartBlock>0</useHeaderCartBlock>
+                <blocks>top.links,headerCart,checkout.cart,cart_sidebar,minicart_head,ajaxcart</blocks>
+                <messageHandle>tm_ajaxpro_checkout_cart_add_with_cart_extended</messageHandle>
+            </checkoutCart>
+            <wishlistIndex>
+                <enabled>1</enabled>
+                <enabledForm>1</enabledForm>
+                <enabledDeleteConfirm>1</enabledDeleteConfirm>
+                <blocks>top.links,customer.wishlist,wishlist_sidebar,checkout.cart</blocks>
+            </wishlistIndex>
+            <catalogProductCompare>
+                <enabled>1</enabled>
+                <enabledForm>1</enabledForm>
+                <enabledDeleteConfirm>1</enabledDeleteConfirm>
+                <blocks>catalog.compare.sidebar,right.reports.product.compared</blocks>
+            </catalogProductCompare>
+            <catalogProductView>
+                <enabled>1</enabled>
+                <blocks></blocks>
+            </catalogProductView>
+            <catalogCategoryView>
+                <enabled>1</enabled>
+                <type>scroll</type>
+                <!--<blocks>product_list</blocks>-->
+                <anchor>0</anchor>
+            </catalogCategoryView>
+        </ajax_pro>
+    </default>
+
+    <frontend>
+        <layout>
+            <updates>
+                <ajaxpro>
+                    <file>tm/ajaxpro.xml</file>
+                </ajaxpro>
+            </updates>
+        </layout>
+        <routers>
+            <TM_AjaxPro>
+            <!--  should be set to "admin" when overloading admin stuff (?) -->
+            <use>standard</use>
+            <args>
+                <module>TM_AjaxPro</module>
+                <!--  This is used when "catching" the rewrite above -->
+                <frontName>ajaxpro</frontName>
+            </args>
+            </TM_AjaxPro>
+        </routers>
+        <translate>
+            <modules>
+                <TM_Ajaxpro>
+                    <files>
+                        <default>TM_Ajaxpro.csv</default>
+                    </files>
+                </TM_Ajaxpro>
+            </modules>
+        </translate>
+   </frontend>
+
+   <adminhtml>
+        <translate>
+            <modules>
+                <TM_Ajaxpro>
+                    <files>
+                        <default>TM_Ajaxpro.csv</default>
+                    </files>
+                </TM_Ajaxpro>
+            </modules>
+        </translate>
+    </adminhtml>
+</config>

@@ -1,0 +1,101 @@
+<?php
+/**
+ * Shoping cart sidebar
+ *
+ * @see Mage_Checkout_Block_Cart_Sidebar
+ */
+?>
+<?php if (  !Mage::getStoreConfig('ajax_pro/general/enabled')
+         || !Mage::getStoreConfig('ajax_pro/checkoutCart/useHeaderCartBlock')
+         || TM_AjaxPro_Model_UserAgent::isSearchBot()
+) {
+    return;
+}?>
+
+<div class="ajaxpro-header-cart">
+    <div class="head" id="ajaxpro-content-toggler">
+        <p class="subtotal">
+            <?php if (method_exists($this, 'canApplyMsrp') && $this->canApplyMsrp()): ?>
+                <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+            <?php else: ?>
+                <span class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+                <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                    <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                <?php endif; ?>
+            <?php endif; ?>
+        </p>
+    </div>
+
+    <?php $_items = $this->getRecentItems() ?>
+    <?php if(count($_items)): ?>
+        <div class="content" id="ajaxpro-header-cart-content" style="display: none;">
+            <a title="<?php echo $this->__('Close') ?>" href="#" onclick="$(this).up().hide();return false;"><?php echo $this->__('Close') ?></a>
+
+            <ol id="header-cart" class="mini-products-list">
+            <?php foreach($_items as $_item): ?>
+                <?php echo $this->getItemHtml($_item) ?>
+            <?php endforeach; ?>
+            </ol>
+            <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+
+            <?php if($this->isPossibleOnepageCheckout()): ?>
+            <div class="actions">
+                <?php $_cartQty = $this->getSummaryCount();
+                    $title = $_cartQty == 1 ? $this->__('My Cart (1 item)') : $this->__('My Cart (%s items)', $_cartQty)
+                ?>
+                <button type="button" title="<?php echo $title ?>" class="button left" onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>')"><span><span><?php echo $title ?></span></span></button>
+                <?php //echo $this->getChildHtml('extra_actions') ?>
+                <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+            </div>
+            <?php endif ?>
+        </div>
+    <?php endif ?>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    document.observe("dom:loaded", function (){
+        function toggleHeaderCart() {
+
+            var handle = 'checkout_cart_index';
+            if (-1 != AjaxPro.config.get('handles').indexOf(handle)) {
+                return;
+            }
+
+            var el = $('ajaxpro-header-cart-content');
+            if (!el) {
+                return;
+            }
+            Effect.toggle(el, 'appear', {duration: .2});
+            document.observe('click', function(e) {
+                if (!Event.element(e).up('.ajaxpro-header-cart')) {
+                    el.hide();
+                }
+            });
+            Element.stopObserving(document, 'AjaxPro:message:hide', toggleHeaderCart);
+        };
+
+        AjaxPro.observe('addObservers', function() {
+            Event.observe($('ajaxpro-content-toggler'), 'click', toggleHeaderCart);
+        });
+
+        AjaxPro.observe('onSuccess', function() {
+            if (AjaxPro.message.visible()) {
+                AjaxPro.observe('message:hide', function () {
+                    var handle = 'tm_ajaxpro_checkout_cart_add_with_cart';
+                    if (handle === AjaxPro.config.get('checkoutCart/messageHandle')) {
+                        return;
+                    }
+                    handle = 'tm_ajaxpro_checkout_cart_add_with_cart_extended';
+                    if (handle === AjaxPro.config.get('checkoutCart/messageHandle')) {
+                        return;
+                    }
+
+                    toggleHeaderCart();
+                });
+            } else {
+                toggleHeaderCart();
+            }
+        });
+    });
+//]]>
+</script>

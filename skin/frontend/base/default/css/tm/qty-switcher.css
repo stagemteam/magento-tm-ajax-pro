@@ -1,0 +1,112 @@
+a.qty-switcher-dec, a.qty-switcher-inc {
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px 10px;
+    color: currentColor;
+    vertical-align: middle;
+    /* disable select*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+a.qty-switcher-dec:hover, a.qty-switcher-inc:hover {
+    text-decoration: none;
+}
+
+a.qty-switcher-dec:before,
+a.qty-switcher-inc:after {
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    content: '';
+    display: block;
+    height: 10px;
+    position: absolute;
+    width: 10px;
+    top: 5px;
+    right: 0;
+    transform: rotate(45deg);
+}
+
+a.qty-switcher-inc:after {
+    left: 0;
+    transform: rotate(225deg);
+}
+
+.qty-switcher-cart-wrapper a.qty.qty-switcher-dec,
+.qty-switcher-cart-wrapper a.qty.qty-switcher-inc {
+    padding: 10px 6px;
+    height: auto;
+    width: 0;
+}
+
+.checkout-cart-index a.qty-switcher-dec:before,
+.checkout-cart-index a.qty-switcher-inc:after {
+    height: 8px;
+    width: 8px;
+    top: 6px;
+}
+
+.product-view .add-to-cart a.qty.qty-switcher-dec,
+.product-view .add-to-cart a.qty.qty-switcher-inc {
+    user-select: none;
+    line-height: normal;
+    height: auto;
+}
+
+.product-view .add-to-cart a.qty.qty-switcher-dec,
+.product-view .add-to-cart a.qty.qty-switcher-dec + .qty,
+.product-view .add-to-cart a.qty.qty-switcher-inc {
+    float: none;
+    vertical-align: middle;
+}
+
+.products-grid .qty-increment a.qty-switcher-dec,
+.products-grid .qty-increment a.qty-switcher-inc {
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 25px;
+}
+
+.products-grid .qty-increment {
+    margin-bottom: 5px;
+}
+
+.products-grid .qty-increment .qty,
+.add-to-cart .qty,
+.qty-increment .qty {
+    text-align: center;
+}
+
+.products-grid  .qty-increment input.qty {
+    min-height: 25px;
+}
+
+.products-grid  .qty-increment a.qty-switcher-dec,
+.products-grid  .qty-increment a.qty-switcher-inc {
+    height:auto;
+}
+
+.products-list .qty-increment {
+    margin-bottom: 5px;
+    padding: 0 10px;
+}
+
+.products-list .qty-increment a.qty-switcher-dec,
+.products-list .qty-increment a.qty-switcher-inc {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.products-list .qty-increment .qty {
+    vertical-align: middle;
+}
+
+.qty-increment,
+.qty-switcher-cart-wrapper {
+    white-space: nowrap;
+    display: inline-block;
+}

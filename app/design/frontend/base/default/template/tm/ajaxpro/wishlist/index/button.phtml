@@ -1,0 +1,12 @@
+<?php
+    $_helper = Mage::helper('wishlist');
+    if (1 > $_helper->getItemCount()) {
+        return;
+    }
+?>
+<!--<p class="ajaxpro-or"><?php echo Mage::helper('ajaxpro')->__('or')?></p>-->
+<button class="ajaxpro-button button" onclick="setLocation('<?php echo $_helper->getListUrl() ?>')">
+    <span><span>
+        <?php echo Mage::helper('ajaxpro')->__('Go to Wishlist');?>
+    </span></span>
+</button>

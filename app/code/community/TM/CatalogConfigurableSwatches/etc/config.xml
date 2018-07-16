@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TM_CatalogConfigurableSwatches>
+            <version>1.1.2</version>
+        </TM_CatalogConfigurableSwatches>
+    </modules>
+
+    <global>
+        <models>
+            <catalogconfigurableswatches>
+                <class>TM_CatalogConfigurableSwatches_Model</class>
+            </catalogconfigurableswatches>
+        </models>
+        <helpers>
+            <catalogconfigurableswatches>
+                <class>TM_CatalogConfigurableSwatches_Helper</class>
+            </catalogconfigurableswatches>
+        </helpers>
+    </global>
+
+    <frontend>
+        <tm_layout>
+            <updates>
+                <catalogconfigurableswatches
+                    module="TM_CatalogConfigurableSwatches"
+                    condition="catalogconfigurableswatches/isEnabled"
+                >
+                    <file>tm/configurableswatches.xml</file>
+                </catalogconfigurableswatches>
+            </updates>
+        </tm_layout>
+        <events>
+            <controller_action_layout_generate_blocks_after>
+                <observers>
+                    <catalogconfigurableswatches>
+                        <class>catalogconfigurableswatches/observer</class>
+                        <method>convertLayerBlock</method>
+                    </catalogconfigurableswatches>
+                    <catalogconfigurableswatches_product_list_price>
+                        <class>catalogconfigurableswatches/observer</class>
+                        <method>addCatalogProductListPriceBlock</method>
+                    </catalogconfigurableswatches_product_list_price>
+                </observers>
+            </controller_action_layout_generate_blocks_after>
+            <catalog_product_view_config>
+                <observers>
+                    <catalogconfigurableswatches>
+                        <class>catalogconfigurableswatches/observer</class>
+                        <method>addPriceDuplicateIdSuffix</method>
+                    </catalogconfigurableswatches>
+                </observers>
+            </catalog_product_view_config>
+        </events>
+    </frontend>
+
+    <default>
+        <tmcore>
+            <jslibs>
+                <jquery>1</jquery>
+            </jslibs>
+        </tmcore>
+    </default>
+</config>

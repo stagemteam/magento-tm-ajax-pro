@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- AjaxPro -->
+    <modules>
+        <TM_AjaxPro>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Customer />
+            </depends>
+            <tm_link><![CDATA[http://templates-master.com/magento-extensions/magento-ajaxpro.html]]></tm_link>
+        </TM_AjaxPro>
+    </modules>
+</config>

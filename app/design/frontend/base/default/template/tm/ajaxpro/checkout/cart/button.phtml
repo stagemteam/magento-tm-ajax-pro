@@ -1,0 +1,34 @@
+<?php
+    $_helper = Mage::helper('checkout/cart');
+    if (1 > $_helper->getItemsCount()) {
+        return;
+    }
+    $_isCartPage = false;
+    if (('checkout' === $this->getRequest()->getModuleName()
+        && 'cart' === $this->getRequest()->getControllerName()
+        && in_array($this->getRequest()->getActionName(), array('index', 'updatePost')))
+        ||
+        ('suggest' === $this->getRequest()->getModuleName())) {
+
+        $_isCartPage = true;
+    }
+
+    if ($_isCartPage) {
+        $url = Mage::helper('checkout/url')->getCheckoutUrl();
+        $label  = Mage::helper('ajaxpro')->__('Proceed to Checkout');
+    } else {
+        $url = Mage::getSingleton('checkout/session')->getViewCartUrl(true);
+        if (empty($url)) {
+            $url = $_helper->getCartUrl();
+        }
+
+        $label  = Mage::helper('ajaxpro')->__('View cart & checkout');
+    }
+
+?>
+<!--<p class="ajaxpro-or"><?php echo Mage::helper('ajaxpro')->__('or')?></p>-->
+<button class="ajaxpro-viewcart-button ajaxpro-button button" onclick="setLocation('<?php echo $url ?>')">
+    <span><span>
+        <?php echo $label;?>
+    </span></span>
+</button>

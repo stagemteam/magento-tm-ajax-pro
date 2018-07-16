@@ -1,14 +1,33 @@
 {
-    "name": "stagem/magento-tm-ajax-pro",
-    "type": "magento-module",
-    "license":"MIT Licence",
-    "description":"Magento Ajax Pro",
-    "authors":[{
-        "name":"Serhii Popov",
-        "email":"popow.serhii@gmail.com"
-    }],
-    "extra": {
-        "map": [
-            ]
+  "name": "stagem/magento-tm-ajax-pro",
+  "type": "magento-module",
+  "license": "MIT Licence",
+  "description": "Magento Ajax Pro",
+  "authors": [
+    {
+      "name": "Serhii Popov",
+      "email": "popow.serhii@gmail.com"
     }
+  ],
+  "extra": {
+    "map": [
+      ["app/etc/modules/TM_AjaxPro.xml", "app/etc/modules/TM_AjaxPro.xml"],
+      ["app/etc/modules/TM_CatalogConfigurableSwatches.xml", "app/etc/modules/TM_CatalogConfigurableSwatches.xml"],
+      ["app/etc/modules/TM_QtySwitcher.xml", "app/etc/modules/TM_QtySwitcher.xml"],
+      ["app/locale/en_US/TM_Ajaxpro.csv", "app/locale/en_US/TM_Ajaxpro.csv"],
+      ["app/locale/es_ES/TM_Ajaxpro.csv", "app/locale/es_ES/TM_Ajaxpro.csv"],
+      ["app/locale/fr_FR/TM_Ajaxpro.csv", "app/locale/fr_FR/TM_Ajaxpro.csv"],
+      ["app/locale/it_IT/TM_Ajaxpro.csv", "app/locale/it_IT/TM_Ajaxpro.csv"],
+      ["app/locale/nl_NL/TM_Ajaxpro.csv", "app/locale/nl_NL/TM_Ajaxpro.csv"],
+      ["app/locale/pt_PT/TM_Ajaxpro.csv", "app/locale/pt_PT/TM_Ajaxpro.csv"],
+      ["app/code/community/TM/CatalogConfigurableSwatches/", "app/code/community/TM/CatalogConfigurableSwatches/"],
+      ["app/code/community/TM/QtySwitcher/", "app/code/community/TM/QtySwitcher/"],
+      ["app/code/local/TM/AjaxPro/", "app/code/local/TM/AjaxPro/"],
+      ["app/design/frontend/base/default/layout/tm/ajaxpro.xml", "app/design/frontend/base/default/layout/tm/ajaxpro.xml"],
+      ["app/design/frontend/base/default/layout/tm/configurableswatches.xml", "app/design/frontend/base/default/layout/tm/configurableswatches.xml"],
+      ["app/design/frontend/base/default/layout/tm/qty-switcher.xml", "app/design/frontend/base/default/layout/tm/qty-switcher.xml"],
+      ["app/design/frontend/base/default/template/tm/ajaxpro/", "app/design/frontend/base/default/template/tm/ajaxpro/"],
+      ["app/design/frontend/base/default/template/tm/configurableswatches/", "app/design/frontend/base/default/template/tm/configurableswatches/"],
+    ]
+  }
 }

@@ -1,0 +1,30 @@
+<?php
+    $refererParam = Mage_Customer_Helper_Data::REFERER_QUERY_PARAM_NAME;
+    $referer = $this->getRequest()->getParam($refererParam);
+    if (!$referer) {
+        $referer = Mage::getUrl('*/*/*', array('_current' => true, '_use_rewrite' => true));
+        $referer = Mage::helper('core')->urlEncode($referer);
+    }
+?>
+<script type="text/javascript">
+//<![CDATA[
+document.observe("dom:loaded", function (){
+
+    AjaxPro.config.init(<?php echo Mage::helper('core')->jsonEncode(
+            Mage::getStoreConfig('ajax_pro')
+    )?>)
+        .set('version', '<?php echo (string) Mage::getConfig()->getNode()->modules->TM_AjaxPro->version;?>')
+        .set('handles', <?php echo Zend_Json::encode($this->getLayout()->getUpdate()->getHandles());?>)
+        .set('baseUrl', "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, $this->getRequest()->isSecure()); ?>")
+        .set('isMobile', <?php echo TM_AjaxPro_Model_UserAgent::isMobile() ? 'true' : 'false'?>)
+        .set('isSearchBot', <?php echo TM_AjaxPro_Model_UserAgent::isSearchBot() ? 'true' : 'false'?>)
+        .set('isLoggedIn',  <?php echo Mage::helper('customer')->isLoggedIn() ? 'true' : 'false'?>)
+        .set('_refererParam', '<?php echo $refererParam?>')
+        .set('<?php echo $refererParam?>', '<?php echo $referer;?>')
+    ;
+
+    AjaxPro.init();
+
+});
+//]]>
+</script>

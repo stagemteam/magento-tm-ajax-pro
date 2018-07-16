@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <TM_QtySwitcher>
+        <active>true</active>
+        <codePool>community</codePool>
+        <version>1.0.0</version>
+    </TM_QtySwitcher>
+  </modules>
+</config>
