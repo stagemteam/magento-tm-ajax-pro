@@ -27,7 +27,7 @@
       ["app/design/frontend/base/default/layout/tm/configurableswatches.xml", "app/design/frontend/base/default/layout/tm/configurableswatches.xml"],
       ["app/design/frontend/base/default/layout/tm/qty-switcher.xml", "app/design/frontend/base/default/layout/tm/qty-switcher.xml"],
       ["app/design/frontend/base/default/template/tm/ajaxpro/", "app/design/frontend/base/default/template/tm/ajaxpro/"],
-      ["app/design/frontend/base/default/template/tm/configurableswatches/", "app/design/frontend/base/default/template/tm/configurableswatches/"],
+      ["app/design/frontend/base/default/template/tm/configurableswatches/", "app/design/frontend/base/default/template/tm/configurableswatches/"]
     ]
   }
 }
