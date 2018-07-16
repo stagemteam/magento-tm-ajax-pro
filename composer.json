@@ -27,7 +27,16 @@
       ["app/design/frontend/base/default/layout/tm/configurableswatches.xml", "app/design/frontend/base/default/layout/tm/configurableswatches.xml"],
       ["app/design/frontend/base/default/layout/tm/qty-switcher.xml", "app/design/frontend/base/default/layout/tm/qty-switcher.xml"],
       ["app/design/frontend/base/default/template/tm/ajaxpro/", "app/design/frontend/base/default/template/tm/ajaxpro/"],
-      ["app/design/frontend/base/default/template/tm/configurableswatches/", "app/design/frontend/base/default/template/tm/configurableswatches/"]
+      ["app/design/frontend/base/default/template/tm/configurableswatches/", "app/design/frontend/base/default/template/tm/configurableswatches/"],
+      
+      ["skin/frontend/base/default/css/tm/ajaxpro.css", "skin/frontend/base/default/css/tm/ajaxpro.css"],
+      ["skin/frontend/base/default/css/tm/qty-switcher.css", "skin/frontend/base/default/css/tm/qty-switcher.css"],
+      ["skin/frontend/base/default/images/tm/ajaxpro/", "skin/frontend/base/default/images/tm/ajaxpro/"],
+      ["skin/frontend/base/default/js/tm/ajaxpro/", "skin/frontend/base/default/js/tm/ajaxpro/"],
+      ["skin/frontend/base/default/js/tm/qty-switcher/", "skin/frontend/base/default/js/tm/qty-switcher/"],
+      ["skin/frontend/base/default/tm/configurableswatches/", "skin/frontend/base/default/tm/configurableswatches/"],
+      ["skin/frontend/base/default/js/tm/ajaxpro.js", "skin/frontend/base/default/js/tm/ajaxpro.js"],
+      ["skin/frontend/ultimo/default/js/tm/ajaxpro", "skin/frontend/ultimo/default/js/tm/ajaxpro/"]
     ]
   }
 }
