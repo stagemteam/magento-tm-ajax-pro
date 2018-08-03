@@ -5,10 +5,12 @@ AjaxPro.config = function(){
 
     return {
         init: function(config) {
+            console.log(config);
             Object.extend(_config, config);
             return AjaxPro.config;
         },
         set: function(path, value) {
+            console.log(path, value);
             var config = {};
             config[path] = value;
             Object.extend(_config, config);

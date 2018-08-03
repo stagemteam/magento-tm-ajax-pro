@@ -20,6 +20,8 @@
       ["app/locale/it_IT/TM_Ajaxpro.csv", "app/locale/it_IT/TM_Ajaxpro.csv"],
       ["app/locale/nl_NL/TM_Ajaxpro.csv", "app/locale/nl_NL/TM_Ajaxpro.csv"],
       ["app/locale/pt_PT/TM_Ajaxpro.csv", "app/locale/pt_PT/TM_Ajaxpro.csv"],
+      ["app/locale/ru_RU/TM_Ajaxpro.csv", "app/locale/ru_RU/TM_Ajaxpro.csv"],
+      ["app/locale/uk_UA/TM_Ajaxpro.csv", "app/locale/uk_UA/TM_Ajaxpro.csv"],
       ["app/code/community/TM/CatalogConfigurableSwatches/", "app/code/community/TM/CatalogConfigurableSwatches/"],
       ["app/code/community/TM/QtySwitcher/", "app/code/community/TM/QtySwitcher/"],
       ["app/code/local/TM/AjaxPro/", "app/code/local/TM/AjaxPro/"],
